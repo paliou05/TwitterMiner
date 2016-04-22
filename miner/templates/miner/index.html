@@ -1,0 +1,12 @@
+{% extends 'miner/base.html' %}
+{% block content %}
+                    
+    <div class="col-md-8">
+        <h2><b></b></h2>
+
+            <b><h1>Track Here</h1></b><br>
+            <a class="btn btn-default" href="{% url 'stream' %}" onclick="return confirm('Tracking...');"><span class="glyphicon glyphicon-play"></span></a>
+            <b><h1>Stop Here</h1></b><br>
+            <a class="btn btn-default" href="{% url 'home' %}" onclick="return confirm('Tracking Ended');"><span class="glyphicon glyphicon-stop"></span></a>
+    </div>
+{% endblock %}
