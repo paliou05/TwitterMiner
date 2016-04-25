@@ -2,18 +2,15 @@
 {% block content %}
                     
                 <div class="col-md-8">
-                {% for u in user %}
+                {% for user in users %}
                     <div class="POST">
+                        <tr>
                         
-                        <p>name: {{ user.name }}</p>
-                        <p>scree_name: {{ user.screen_name }}</p>
-                        <p>tweet: {{ user.tweet }}</p>
-                        <p>followers: {{ user.followers }}</p>
-                        <p>favourited: {{ user.favourited }}</p>
-                        <p>description: {{ user.description }}</p>
-                        <p>retweets: {{ user.retweets }}</p>
-                        <a class="btn btn-default" href="{% url 'post_edit' pk=post.pk %}" onclick="return confirm('Sure you wanna edit post?');"><span class="glyphicon glyphicon-pencil"></span></a>
-                        <a class="btn btn-default" href="{% url 'post_delete' pk=post.pk %}" onclick="return confirm('Sure you wanna delete post?');"><span class="glyphicon glyphicon-remove"></span></a>
+                            <td><h1><b>Name</b>: {{ user.name }}</td></h1></br>
+                            <td><b>Screen Name</b>: {{ user.screen_name }}</td></br>
+                            <td><h3 style="text-align: center"><b>Tweet</b>: {{ user.tweet }}</td></h3>
+
+                        </tr>
                     </div>
                 {% endfor %}
                 </div>

@@ -5,10 +5,10 @@ from tweepy import OAuthHandler
 from tweepy.streaming import StreamListener
 from .models import User
 
-ckey="KKwsfmkUMpv8ag7ptJPui5Xp8"
-csecret="w6Fx0fPl7rfNayZXPgQ3crIAsWaNaENmtQJZJSnGgLJtoWs1Wt"
-atoken="4178185372-Eq4HWoHZtOu1e8uizQhvEKF8ylRAqmBAf7zN2LK"
-asecret="cC7RTyjoeQr68zAd1Dq6lhtnwAUO6AUQO2GUZow8EdKBC"
+ckey=""
+csecret=""
+atoken=""
+asecret=""
 
 class listener(StreamListener):
     
@@ -33,7 +33,7 @@ def retrieve_data():
     auth = OAuthHandler(ckey, csecret)
     auth.set_access_token(atoken, asecret)
     twitterStream = Stream(auth, listener())
-    twitterStream.filter(track=["car"])
+    twitterStream.filter(track=["data mining"])
 
     
     

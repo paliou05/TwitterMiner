@@ -13,9 +13,9 @@ from django.views.generic.base import View
 
 # Create your views here.
 
-def show_users(request):
+def home(request):
     users = User.objects.all()
-    return render(request, 'miner/home.html', {'users':User })
+    return render(request, 'miner/home.html', {'users':users })
 
 def stream(request):
     retrieve_data()
@@ -36,21 +36,21 @@ def handler500(request):
     response.status_code = 500
     return response
 
-"""def post_edit(request, pk):
-    post = get_object_or_404(Post, pk=pk)
-    if request.method == "POST":
-        form = PostForm(request.POST, instance=post)
-        if form.is_valid():
-            post = form.save(commit=False)
-            post.author = request.user
-            post.published_date = timezone.now()
-            post.save()
-            return redirect('post_list')
-    else:
-        form = PostForm(instance=post)
-    return render(request, 'blog/post_edit.html', {'form': form})
+def user_delete(request, pk):
+    user = get_object_or_404(User, pk=pk)
+    user.delete()
+    return redirect('home')
 
-def post_delete(request, pk):
-    post = get_object_or_404(Post, pk=pk)
-    post.delete()
-    return redirect('post_list')"""
+"""def user_edit(request, pk):
+    user = get_object_or_404(User, pk=pk)
+    if request.method == "POST":
+        #form = PostForm(request.POST, instance=post)
+        #if form.is_valid():
+            #post = form.save(commit=False)
+            #post.author = request.user
+            #post.published_date = timezone.now()
+            #post.save()
+            #return redirect('post_list')
+    #else:
+        #form = PostForm(instance=post)
+    #return render(request, 'blog/post_edit.html', {'form': form})"""
