@@ -18,7 +18,7 @@ def home(request):
     return render(request, 'miner/home.html', {'users':users })
 
 def stream(request):
-    retrieve_data()
+    retrieve_data().time.sleep(10)
     return render(request, 'miner/stream.html')
 
 def index(request):

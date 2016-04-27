@@ -14,3 +14,4 @@ class User(models.Model):
     created_at = models.DateTimeField(null=True, blank=True)
     screen_name = models.CharField(max_length=200)
     description = models.CharField(max_length=200, null=True, blank=True)
+    
