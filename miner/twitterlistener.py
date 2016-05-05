@@ -6,10 +6,10 @@ from tweepy import OAuthHandler
 from tweepy.streaming import StreamListener
 from .models import User
 
-ckey="KKwsfmkUMpv8ag7ptJPui5Xp8"
-csecret="w6Fx0fPl7rfNayZXPgQ3crIAsWaNaENmtQJZJSnGgLJtoWs1Wt"
-atoken="4178185372-Eq4HWoHZtOu1e8uizQhvEKF8ylRAqmBAf7zN2LK"
-asecret="cC7RTyjoeQr68zAd1Dq6lhtnwAUO6AUQO2GUZow8EdKBC"
+ckey=""
+csecret=""
+atoken=""
+asecret=""
 
 class listener(StreamListener):
     
@@ -23,13 +23,18 @@ class listener(StreamListener):
             user.favourited = json_data['user']['favourites_count']
             user.retweets = json_data['retweet_count']
             user.screen_name = json_data['user']['screen_name']
-            user.description = json_data['user']['description']
+            try:
+                user.description = json_data['user']['description']
+            except IntegrityError:
+                user.description = None
             user.save()
-            print user.description
+            
+            print user.description.encode('utf8')
+
         except BaseException,e:
-                print '\n'
-                print 'Failed on Data',str(e)
-                time.sleep(5)
+            print '\n'
+            print 'Failed on Data',str(e)
+            time.sleep(5)
         return True
     
     def on_error(self, status):
