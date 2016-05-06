@@ -23,17 +23,16 @@ class listener(StreamListener):
             user.favourited = json_data['user']['favourites_count']
             user.retweets = json_data['retweet_count']
             user.screen_name = json_data['user']['screen_name']
-            try:
-                user.description = json_data['user']['description']
-            except IntegrityError:
-                user.description = None
+            user.description = json_data['user']['description']
             user.save()
             
             print user.description.encode('utf8')
 
         except BaseException,e:
-            print '\n'
-            print 'Failed on Data',str(e)
+            user.description = ""
+            print "#################################"
+            print "#### ADDED BLANK DESCRIPTION ####"
+            print "#################################"
             time.sleep(5)
         return True
     

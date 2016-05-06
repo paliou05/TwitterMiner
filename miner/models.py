@@ -13,5 +13,5 @@ class User(models.Model):
     favourited = models.IntegerField(null=True, blank=True)
     created_at = models.DateTimeField(null=True, blank=True)
     screen_name = models.CharField(max_length=200)
-    description = models.CharField(max_length=200, null=True, blank=True)
+    description = models.CharField(max_length=200, blank=True)
     
