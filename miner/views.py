@@ -10,11 +10,20 @@ from django.http import HttpResponseRedirect
 from django.contrib import messages
 from django.core.urlresolvers import reverse
 from django.views.generic.base import View
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 # Create your views here.
 
 def home(request):
     users = User.objects.all()
+    paginator = Paginator(users,25)
+    page = request.GET.get('page')
+    try:
+        users = paginator.page(page)
+    except PageNotAnInteger:
+        users = paginator.page(1)
+    except EmptyPage:
+        users = paginator.page(paginator.num_pages)
     return render(request, 'miner/home.html', {'users':users })
 
 def stream(request):
