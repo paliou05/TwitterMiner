@@ -1,0 +1,17 @@
+{% extends 'miner/base.html' %}
+{% block content %}
+    <div class="col-md-8">
+    {% for user in users %}
+        <div class="POST">
+            <tr>
+                        
+            <td><h2><b>Name</b>: {{ user.name }}</td></h2></br>
+            <td><h1><b>Screen Name</b>: {{ user.screen_name }}</td></h1></br>
+            <td><h3 style="text-align: center"><b>Trust</b>: {{ user.trust }}</td></h3>
+                            
+
+            </tr>
+        </div>
+    {% endfor %}
+    </div>
+{% endblock %}

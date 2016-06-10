@@ -2,7 +2,7 @@ import datetime
 from twitterlistener import retrieve_data
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
-from .models import User
+from .models import User,Tweet
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.http import HttpResponse
@@ -15,19 +15,19 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 # Create your views here.
 
 def home(request):
-    users = User.objects.all()
-    paginator = Paginator(users,25)
+    tweets = Tweet.objects.all()
+    paginator = Paginator(tweets,15)
     page = request.GET.get('page')
     try:
-        users = paginator.page(page)
+        tweets = paginator.page(page)
     except PageNotAnInteger:
-        users = paginator.page(1)
+        tweets = paginator.page(1)
     except EmptyPage:
-        users = paginator.page(paginator.num_pages)
-    return render(request, 'miner/home.html', {'users':users })
+        tweets = paginator.page(paginator.num_pages)
+    return render(request, 'miner/home.html', {'tweets': tweets })
 
 def stream(request):
-    retrieve_data().time.sleep(10)
+    retrieve_data()
     return render(request, 'miner/stream.html')
 
 def index(request):
@@ -50,16 +50,7 @@ def user_delete(request, pk):
     user.delete()
     return redirect('home')
 
-"""def user_edit(request, pk):
-    user = get_object_or_404(User, pk=pk)
-    if request.method == "POST":
-        #form = PostForm(request.POST, instance=post)
-        #if form.is_valid():
-            #post = form.save(commit=False)
-            #post.author = request.user
-            #post.published_date = timezone.now()
-            #post.save()
-            #return redirect('post_list')
-    #else:
-        #form = PostForm(instance=post)
-    #return render(request, 'blog/post_edit.html', {'form': form})"""
+def get_top_users(request):
+    users = User.objects.order_by('-trust')[:10]
+    return render(request, 'miner/get_top_users.html', {'users': users })
+

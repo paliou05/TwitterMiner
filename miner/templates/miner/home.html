@@ -2,29 +2,31 @@
 {% block content %}
                     
                 <div class="col-md-8">
-                {% for user in users %}
+                {% for tweet in tweets %}
                     <div class="POST">
                         <tr>
                         
-                            <td><h1><b>Name</b>: {{ user.name }}</td></h1></br>
-                            <td><b>Screen Name</b>: {{ user.screen_name }}</td></br>
-                            <td><h3 style="text-align: center"><b>Tweet</b>: {{ user.tweet }}</td></h3>
+                            <td><h1><b>Name</b>: {{ tweet.user.name }}</td></h1></br>
+                            <td><b>Screen Name</b>: {{ tweet.user.screen_name }}</td></br>
+                            
+                            <td><h3 style="text-align: center"><b>Tweet</b>: {{ tweet.text }}</td></h3>
+                            
 
                         </tr>
                     </div>
                 {% endfor %}
                 <div class="pagination">
                     <span class="step-links">
-                        {% if users.has_previous %}
-                            <a href="?page={{ users.previous_page_number }}">previous</a>
+                        {% if tweets.has_previous %}
+                            <a href="?page={{ tweets.previous_page_number }}">previous</a>
                         {% endif %}
 
                         <span class="current">
-                            Page {{ users.number }} of {{ users.paginator.num_pages }}.
+                            Page {{ tweets.number }} of {{ tweets.paginator.num_pages }}.
                         </span>
 
-                        {% if users.has_next %}
-                            <a href="?page={{ users.next_page_number }}">next</a>
+                        {% if tweets.has_next %}
+                            <a href="?page={{ tweets.next_page_number }}">next</a>
                         {% endif %}
                     </span>
                 </div>
